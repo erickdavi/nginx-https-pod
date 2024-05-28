@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-https
+  name: nginx-https
+  namespace: default
+spec:
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 32400
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    app: nginx-https
+  sessionAffinity: None
+  type: NodePort

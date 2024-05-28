@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  nginx.conf: "events { } \n\nhttp { \n  server {\n    listen 80; \n    listen 443
+    ssl; \n    \n    ssl_certificate /etc/nginx/tls/nginx.crt; \n    ssl_certificate_key
+    /etc/nginx/tls/nginx.key; \n\n    location / { \n      return 200 'Bem-vindo ao
+    Nginx!\\n'; \n      add_header Content-Type text/plain; \n    } \n  }\n}\n"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2024-05-28T05:03:51Z"
+  name: nginx-config
+  namespace: default
+  resourceVersion: "157659"
+  uid: c7446811-e681-4bb0-a6b7-8f494334d6fb
