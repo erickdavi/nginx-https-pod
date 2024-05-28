@@ -1,5 +1,14 @@
 #!/bin/bash
-[ -f .vars ] && source .vars
+
+VARS_FILE="./.vars"
+if [ -f ${VARS_FILE} ]
+then
+ source ${VARS_FILE}
+else
+  echo "Crie o arquivo de variáveis ${VARS_FILE} e inicialize suas variáveis"
+  exit 1
+fi
+
 
 deploy(){
   kubectl apply -f ./nginx-config.yaml
