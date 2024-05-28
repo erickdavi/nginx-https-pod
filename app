@@ -1,9 +1,12 @@
+#!/bin/bash
+[ -f .vars ] && source .vars
+
 deploy(){
   kubectl apply -f ./nginx-config.yaml
-  kubectl apply -f ./nginx-secret.yaml
+  envsubst < nginx-secret.yaml | kubectl apply -f -
   kubectl apply -f ./nginx-https-pod.yaml
   kubectl apply -f ./nginx-service.yaml
-  sleep 10
+  sleep 5
   kubectl get cm,secret,pod,svc
 }
 undeploy(){
@@ -11,7 +14,7 @@ undeploy(){
   kubectl delete -f ./nginx-secret.yaml
   kubectl delete -f ./nginx-https-pod.yaml
   kubectl delete -f ./nginx-service.yaml
-  sleep 10
+  sleep 5
   kubectl get cm,secret,pod,svc
 }
 
